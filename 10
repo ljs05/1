@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 class Student:
-   '?¨´¨®D?¡ì¨¦¨²¦Ì?D??¡é'
+   '?Â¨Â´Â¨Â®D?Â¡Ã¬Â¨Â¦Â¨Â²Â¦ÃŒ?D??Â¡Ã©'
    stuCount = 0
  
    def __init__(self,stu_no,name,stu_class,male):
