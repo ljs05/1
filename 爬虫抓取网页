@@ -72,14 +72,3 @@ class ZLZP:
 
 spider = ZLZP()
 spider.start()
-© 2018 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-API
-Training
-Shop
-Blog
