@@ -2,21 +2,21 @@
 import urllib
 import urllib2
 import re
-import thread
+import  thread
 import time
 
-class HT:
+class ZLZP:
 
     def __init__(self):
         self.pageIndex = 1
-        self.user_agent = 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36'
+        self.user_agent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36'
         self.headers = {'User-Agent' :self.user_agent}
         self.stories = []
         self.enable = False
 
     def getPage(self,pageIndex):
         try:
-            url = 'http://wx.58.com/'
+            url = 'http://wx.58.com/job/?key=ps&final=1&jump=1' + str(pageIndex)
             request = urllib2.Request(url,headers=self.headers)
             response = urllib2.urlopen(request)
             pageCode = response.read().decode('utf-8')
@@ -31,11 +31,14 @@ class HT:
         if not pageCode:
             print "page load error"
             return None
-        pattern = re.compile('<td class = "cxxt-title">.*?<a.*?>.*?<div class="text-success company">(.*?)</div></a></td>.*?<td class="text-ellipsis cxxt-position">.*?<a.*?>(.*?)</a></td>.*?<td class="text-ellipsis">(.*?)</td>',re.S)
+        pattern = re.compile('<div class="job_name clearfix" .*?>.*?<a .*?>.*?<.*?>(.*?)</a>.*?<p class="job_salary">(.*?)<.*?>(.*?)</a>.*?(.*?)</p>',re.S)
         items = re.findall(pattern,pageCode)
         pageStories = []
         for item in items:
-            pageStories.append([item[0].strip(),item[1].strip(),item[2].strip()])
+            print item[0]
+            #print item[1]
+            #print item[2]
+            pageStories.append([item[0].strip(),item[1].strip(),item[2].strip(),item[3].strip()])
         return pageStories
 
     def loadPage(self):
@@ -53,7 +56,7 @@ class HT:
             if input == "Q":
                 self.enable = False
                 return
-            print u"第%d页\t标题:%s\t文章标签:%s\t涉及城市:%s\n%s" %(page,story[0],story[2],story[3],story[1])
+            print u"第%d页\t职位:%s\t工资:%s\t公司地点:%s\n%s" %(page,story[0],story[2],story[3],story[1])
 
     def start(self):
         print u'正在读取58同城，回车查看，Q退出'
@@ -67,5 +70,16 @@ class HT:
                 del self.stories[0]
                 self.getOneStory(pageStories,nowPage)
 
-spider = HT()
+spider = ZLZP()
 spider.start()
+© 2018 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+API
+Training
+Shop
+Blog
